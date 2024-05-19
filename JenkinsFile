@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('clonando repositorio') {
+            steps {
+                git branch: 'main', url: 'https://github.com/arthur12087/teste-api-ebac.git'
+            }
+        }
+        stage("Instalando dependencias") {
+            steps {
+                sh 'npm install'
+                
+            }
+        }
+        stage('executando testes') {
+            steps {
+                sh 'NO_COLOR=1 npx cypress run'
+            }
+        }
+        
+    }
+}
